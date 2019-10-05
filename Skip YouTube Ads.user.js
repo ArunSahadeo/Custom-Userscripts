@@ -10,19 +10,13 @@
 
 (function (global) {
     'use strict';
-
     var self = global; 
-    self.requestUri = new String(window.location.pathname).replace(/^\/+/, '');
 
     self.elementExists = function (sel) {
         return document.querySelectorAll(sel).length;
     };
 
     self.toggleAdSkip = function (sel) {
-        if (self.requestUri !== 'watch') {
-            return;
-        }
-
         var canSkipAd = setInterval(function () {
             let skipBtn = document.querySelector('.ytp-ad-skip-button'); 
 
@@ -34,7 +28,7 @@
     }
 
     self.bindEvents = function () {
-        if (self.requestUri === 'watch') {
+        if (self.elementExists('video.video-stream')) {
             self.toggleAdSkip();
         }
     };
